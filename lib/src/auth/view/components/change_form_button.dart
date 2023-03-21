@@ -12,7 +12,41 @@ class ChangeFormButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return Row(
+      mainAxisAlignment: formType == FormType.login
+          ? MainAxisAlignment.end
+          : MainAxisAlignment.start,
+      children: [
+        TextButton(
+          onPressed: () {
+            if (formType == FormType.login) {
+              context.read<AuthController>().formType = FormType.signup;
+            } else {
+              context.read<AuthController>().formType = FormType.login;
+            }
+          },
+          child: formType == FormType.login
+              ? Row(
+                  // mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text('Signup'),
+                    Icon(Icons.arrow_forward_ios),
+                  ],
+                )
+              : Row(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(Icons.arrow_back_ios),
+                    Text('Login'),
+                  ],
+                ),
+        ),
+      ],
+    );
+  }
+}
+/* 
+return TextButton(
       onPressed: () {
         if (formType == FormType.login) {
           context.read<AuthController>().formType = FormType.signup;
@@ -20,14 +54,20 @@ class ChangeFormButton extends StatelessWidget {
           context.read<AuthController>().formType = FormType.login;
         }
       },
-      child: Text(
-        formType == FormType.login ? 'Signup' : 'Login',
-        style: TextStyle(
-          color: formType == FormType.login
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.secondary,
-        ),
-      ),
+      child: formType == FormType.login
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: const [
+                Text('Signup'),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const [
+                Icon(Icons.arrow_back_ios),
+                Text('Login'),
+              ],
+            ),
     );
-  }
-}
+ */

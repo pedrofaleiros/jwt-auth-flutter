@@ -10,11 +10,12 @@ class NameInput extends StatelessWidget {
     return Consumer<AuthController>(
       builder: (_, authController, __) => TextField(
         controller: authController.nameController,
-        
+        onEditingComplete: () {
+          FocusScope.of(context).requestFocus(authController.emailFocus);
+        },
         onChanged: (value) {
           // authController.authRequest =
           //     authController.authRequest.copyWith(email: value);
-
         },
         decoration: InputDecoration(
           labelText: 'Name',

@@ -35,6 +35,9 @@ class AuthController with ChangeNotifier {
   final FocusNode _passwordFocus = FocusNode();
   FocusNode get passwordFocus => _passwordFocus;
 
+  final FocusNode _emailFocus = FocusNode();
+  FocusNode get emailFocus => _emailFocus;
+
   Future<void> signup() async {
     isLoading = true;
     errorText = null;

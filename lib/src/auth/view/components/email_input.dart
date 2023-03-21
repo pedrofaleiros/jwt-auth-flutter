@@ -9,6 +9,7 @@ class EmailInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthController>(
       builder: (_, authController, ch) => TextField(
+        focusNode: authController.emailFocus,
         controller: authController.emailController,
         onEditingComplete: () {
           FocusScope.of(context).requestFocus(authController.passwordFocus);

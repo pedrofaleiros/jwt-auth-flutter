@@ -30,11 +30,33 @@ class LoginForm extends StatelessWidget {
             PasswordInput(),
             SizedBox(height: 10),
             ErrorText(),
-            ActionButton(formType: FormType.login),
-            ChangeFormButton(formType: FormType.login),
+            ButtonsRow(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ButtonsRow extends StatelessWidget {
+  const ButtonsRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(flex: 1, child: Container()),
+        const Expanded(
+          flex: 1,
+          child: ActionButton(formType: FormType.login),
+        ),
+        const Expanded(
+          flex: 1,
+          child: ChangeFormButton(formType: FormType.login),
+        ),
+      ],
     );
   }
 }

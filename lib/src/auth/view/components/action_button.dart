@@ -24,19 +24,19 @@ class ActionButton extends StatelessWidget {
     return Consumer<AuthController>(
       builder: (_, controller, ch) => ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-            formType == FormType.login
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.secondary,
-          ),
+          // backgroundColor: MaterialStateProperty.all(
+          //   formType == FormType.login
+          //       ? Theme.of(context).colorScheme.primary
+          //       : Theme.of(context).colorScheme.secondary,
+          // ),
           padding: MaterialStateProperty.all(
             controller.isLoading
                 ? const EdgeInsets.symmetric(
-                    horizontal: 55,
+                    horizontal: 30,
                     vertical: 8,
                   )
                 : const EdgeInsets.symmetric(
-                    horizontal: 50,
+                    horizontal: 25,
                     vertical: 10,
                   ),
           ),

@@ -36,7 +36,15 @@ class _PasswordInputState extends State<PasswordInput> {
         focusNode: authController.passwordFocus,
         obscureText: _obscureText,
         controller: authController.passwordController,
-        onEditingComplete: () async => authController.login(),
+        onEditingComplete: () async {
+          FocusScope.of(context).requestFocus(FocusNode());
+          await Future.delayed(const Duration(milliseconds: 100));
+          if (authController.formType == FormType.login) {
+            await authController.login();
+          } else {
+            await authController.signup();
+          }
+        },
         onChanged: (value) {
           authController.authRequest =
               authController.authRequest.copyWith(password: value);
