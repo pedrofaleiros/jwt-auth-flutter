@@ -20,7 +20,14 @@ class ChangeFormButton extends StatelessWidget {
           context.read<AuthController>().formType = FormType.login;
         }
       },
-      child: Text(formType == FormType.login ? 'Signup' : 'Login'),
+      child: Text(
+        formType == FormType.login ? 'Signup' : 'Login',
+        style: TextStyle(
+          color: formType == FormType.login
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.secondary,
+        ),
+      ),
     );
   }
 }

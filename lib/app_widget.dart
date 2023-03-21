@@ -21,8 +21,8 @@ class AppWidget extends StatelessWidget {
         theme: ThemeData(
           canvasColor: const Color(0xfff5f5f7),
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: const Color(0xff0071e3),
-          ),
+              primary: const Color(0xff0071e3),
+              secondary: const Color(0xffea4335)),
         ),
         initialRoute: AppSplashPage.routeName,
         routes: {
