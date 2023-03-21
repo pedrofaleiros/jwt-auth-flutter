@@ -1,9 +1,15 @@
-import 'package:authentication/src/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
+import '../../controller/auth_controller.dart';
+
+class ActionButton extends StatelessWidget {
+  const ActionButton({
+    super.key,
+    required this.formType,
+  });
+
+  final FormType formType;
 
   Widget get _loadingIndicator => SizedBox(
         height: 25,
@@ -21,11 +27,11 @@ class LoginButton extends StatelessWidget {
           padding: MaterialStateProperty.all(
             controller.isLoading
                 ? const EdgeInsets.symmetric(
-                    horizontal: 30,
+                    horizontal: 55,
                     vertical: 8,
                   )
                 : const EdgeInsets.symmetric(
-                    horizontal: 20,
+                    horizontal: 50,
                     vertical: 10,
                   ),
           ),
@@ -35,13 +41,20 @@ class LoginButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed:
-            controller.isLoading ? null : () async => await controller.login(),
+        onPressed: controller.isLoading
+            ? null
+            : () async {
+                if (formType == FormType.login) {
+                  await controller.login();
+                } else {
+                  await controller.signup();
+                }
+              },
         child: controller.isLoading
             ? _loadingIndicator
-            : const Text(
-                'Login',
-                style: TextStyle(
+            : Text(
+                formType == FormType.login ? 'Login' : 'Signup',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

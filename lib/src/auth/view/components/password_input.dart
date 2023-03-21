@@ -44,6 +44,22 @@ class _PasswordInputState extends State<PasswordInput> {
         decoration: InputDecoration(
           labelText: 'Password',
           suffixIcon: _sufficIcon,
+          labelStyle: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          //
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 1.5,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2.5,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
         ),
       ),
     );

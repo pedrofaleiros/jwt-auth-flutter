@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthViewModel implements AuthViewModelInterface {
   final url = 'http://172.30.129.176:3333';
   final loginUrl = '/session';
+  final signupUrl = '/user';
   final _userKey = 'UserData';
 
   @override
@@ -17,6 +18,26 @@ class AuthViewModel implements AuthViewModelInterface {
     try {
       final Response res = await Dio().post(
         '$url$loginUrl',
+        data: req.toMap(),
+      );
+
+      return res.data;
+    } on DioError catch (e) {
+      final Response<dynamic> error = e.response!;
+
+      final data = json.decode(error.toString()) as Map<String, dynamic>;
+
+      throw AuthException(data['error'].toString());
+    } catch (e) {
+      throw AuthException(e.toString());
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> signup(SignupRequestModel req) async {
+    try {
+      final Response res = await Dio().post(
+        '$url$signupUrl',
         data: req.toMap(),
       );
 

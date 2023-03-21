@@ -1,4 +1,5 @@
 import 'package:authentication/src/auth/controller/auth_controller.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +19,22 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: TextButton(
-          onPressed: () {
+          onPressed: () async {
             //como utilizar o token para requisicoes
             final token = context.read<AuthController>().userToken;
-            print(token ?? 'sem token');
+
+            try {
+              final Response res = await Dio().get(
+                'http://172.30.129.176:3333/food',
+                options: Options(headers: {
+                  'Authorization': 'Bearer $token',
+                }),
+              );
+
+              print(res.data);
+            } catch (e) {
+              print(e.toString());
+            }
           },
           child: const Text('Press'),
         ),

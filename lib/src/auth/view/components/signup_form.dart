@@ -1,14 +1,15 @@
 import 'package:authentication/src/auth/controller/auth_controller.dart';
 import 'package:authentication/src/auth/view/components/action_button.dart';
 import 'package:authentication/src/auth/view/components/change_form_button.dart';
+import 'package:authentication/src/auth/view/components/name_input.dart';
 import 'package:flutter/material.dart';
 
 import 'email_input.dart';
 import 'error_text.dart';
 import 'password_input.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({
+class SignupForm extends StatelessWidget {
+  const SignupForm({
     super.key,
   });
 
@@ -25,13 +26,15 @@ class LoginForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: const [
+            NameInput(),
+            SizedBox(height: 10),
             EmailInput(),
             SizedBox(height: 10),
             PasswordInput(),
             SizedBox(height: 10),
             ErrorText(),
-            ActionButton(formType: FormType.login),
-            ChangeFormButton(formType: FormType.login),
+            ActionButton(formType: FormType.signup),
+            ChangeFormButton(formType: FormType.signup),
           ],
         ),
       ),
