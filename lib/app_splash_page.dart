@@ -29,7 +29,11 @@ class AppSplashPage extends StatelessWidget {
             final user = context.read<AuthController>().user;
 
             if (user != null) {
-              context.read<HomeController>().user = user;
+              final homeController = context.read<HomeController>();
+              homeController.user = user;
+              homeController.loadMeals().then((value) {
+                return;
+              }).catchError(() {});
               return HomePage();
             }
 
