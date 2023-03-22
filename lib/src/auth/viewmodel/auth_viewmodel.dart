@@ -16,38 +16,51 @@ class AuthViewModel implements AuthViewModelInterface {
   @override
   Future<Map<String, dynamic>> login(AuthRequestModel req) async {
     try {
-      final Response res = await Dio().post(
+      print('tentando requisicao');
+
+      final dio = Dio();
+      dio.options.connectTimeout = const Duration(seconds: 3);
+      dio.options.sendTimeout = const Duration(seconds: 3);
+
+      final Response res = await dio.post(
         '$url$loginUrl',
         data: req.toMap(),
       );
 
       return res.data;
     } on DioError catch (e) {
-      final Response<dynamic> error = e.response!;
-
-      final data = json.decode(error.toString()) as Map<String, dynamic>;
-
-      throw AuthException(data['error'].toString());
+      throw handleDioError(e);
     } catch (e) {
       throw AuthException(e.toString());
     }
   }
 
+  AuthException handleDioError(DioError e) {
+    if (e.type == DioErrorType.connectionTimeout) {
+      return AuthException('Tempo excedido');
+    }
+
+    final Response<dynamic> error = e.response!;
+    final data = json.decode(error.toString()) as Map<String, dynamic>;
+    return AuthException(data['error'].toString());
+  }
+
   @override
   Future<Map<String, dynamic>> signup(SignupRequestModel req) async {
     try {
-      final Response res = await Dio().post(
+
+      final dio = Dio();
+      dio.options.connectTimeout = const Duration(seconds: 3);
+      dio.options.sendTimeout = const Duration(seconds: 3);
+
+      final Response res = await dio.post(
         '$url$signupUrl',
         data: req.toMap(),
       );
 
       return res.data;
     } on DioError catch (e) {
-      final Response<dynamic> error = e.response!;
-
-      final data = json.decode(error.toString()) as Map<String, dynamic>;
-
-      throw AuthException(data['error'].toString());
+      throw handleDioError(e);
     } catch (e) {
       throw AuthException(e.toString());
     }
