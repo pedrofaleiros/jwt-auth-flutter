@@ -1,6 +1,7 @@
 import 'package:authentication/app_splash_page.dart';
 import 'package:authentication/src/auth/controller/auth_controller.dart';
 import 'package:authentication/src/auth/view/pages/auth_page.dart';
+import 'package:authentication/src/home/controller/home_controller.dart';
 import 'package:authentication/src/home/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,9 @@ class AppWidget extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AuthController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HomeController(),
         ),
       ],
       child: MaterialApp(

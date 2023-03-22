@@ -16,6 +16,8 @@ class AuthController with ChangeNotifier {
   TextEditingController nameController = TextEditingController();
 
   UserModel? _globalUser;
+  UserModel? get user => _globalUser;
+  
   String? get userToken => _globalUser == null ? null : _globalUser!.token;
 
   bool get isAuthenticated => _globalUser != null;
