@@ -1,5 +1,6 @@
 import 'package:authentication/src/auth/controller/auth_controller.dart';
 import 'package:authentication/src/home/controller/home_controller.dart';
+import 'package:authentication/src/home/view/components/meals_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,12 +55,10 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.arrow_back),
         ),
       ),
-      //TODO -----------------------------
-      //componentizar widgets
-      //
-      //
-      //
-      body: HomeWidget(),
+      body: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: MealsList(),
+      ),
     );
   }
 }
