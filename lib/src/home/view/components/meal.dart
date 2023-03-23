@@ -2,7 +2,7 @@ import 'package:authentication/src/home/model/meal_model.dart';
 import 'package:authentication/src/home/view/components/items_list.dart';
 import 'package:flutter/material.dart';
 
-import 'meal_and_time.dart';
+import 'name_and_time.dart';
 
 class Meal extends StatelessWidget {
   const Meal({

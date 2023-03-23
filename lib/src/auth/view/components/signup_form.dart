@@ -54,11 +54,11 @@ class ButtonsRow extends StatelessWidget {
           flex: 2,
           child: ChangeFormButton(formType: FormType.signup),
         ),
+        Expanded(flex: 1, child: Container()),
         const Expanded(
           flex: 3,
           child: ActionButton(formType: FormType.signup),
         ),
-        Expanded(flex: 2, child: Container()),
       ],
     );
   }

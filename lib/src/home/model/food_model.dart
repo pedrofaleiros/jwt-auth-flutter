@@ -21,6 +21,28 @@ class FoodModel {
     required this.liquid,
   });
 
+  FoodModel copyWith({
+    String? id,
+    double? kcal,
+    double? carb,
+    double? prot,
+    double? fat,
+    double? fiber,
+    String? name,
+    bool? liquid,
+  }) {
+    return FoodModel(
+      id: id ?? this.id,
+      kcal: kcal ?? this.kcal,
+      carb: carb ?? this.carb,
+      prot: prot ?? this.prot,
+      fat: fat ?? this.fat,
+      fiber: fiber ?? this.fiber,
+      name: name ?? this.name,
+      liquid: liquid ?? this.liquid,
+    );
+  }
+
   factory FoodModel.fromMap(Map<String, dynamic> map) => FoodModel(
         id: map['id'],
         name: map['name'],
@@ -34,12 +56,12 @@ class FoodModel {
 
   Map<String, dynamic> toMap() => {
         'id': id,
+        'name': name,
         'kcal': kcal,
         'carb': carb,
         'prot': prot,
         'fat': fat,
         'fiber': fiber,
-        'name': name,
         'liquid': liquid,
       };
 

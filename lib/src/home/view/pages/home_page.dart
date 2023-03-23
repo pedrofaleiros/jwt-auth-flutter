@@ -1,6 +1,8 @@
 import 'package:authentication/src/auth/controller/auth_controller.dart';
+import 'package:authentication/src/home/controller/food_controller.dart';
 import 'package:authentication/src/home/controller/home_controller.dart';
 import 'package:authentication/src/home/view/components/meals_list.dart';
+import 'package:authentication/src/home/view/pages/foods_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,8 +54,23 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () async => context.read<AuthController>().logout(),
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.logout),
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              if (context.read<FoodController>().foods.isEmpty) {
+                final userToken = context.read<AuthController>().userToken;
+                if (userToken == null) {
+                  return;
+                }
+                await context.read<FoodController>().loadFoods(userToken);
+              }
+              Navigator.pushNamed(context, FoodsPage.routeName);
+            },
+            icon: const Icon(Icons.food_bank_outlined),
+          ),
+        ],
       ),
       body: const Padding(
         padding: EdgeInsets.all(8.0),

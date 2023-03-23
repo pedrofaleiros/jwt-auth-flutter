@@ -19,8 +19,8 @@ class AuthViewModel implements AuthViewModelInterface {
       print('tentando requisicao');
 
       final dio = Dio();
-      dio.options.connectTimeout = const Duration(seconds: 3);
-      dio.options.sendTimeout = const Duration(seconds: 3);
+      dio.options.connectTimeout = const Duration(seconds: 5);
+      dio.options.sendTimeout = const Duration(seconds: 5);
 
       final Response res = await dio.post(
         '$url$loginUrl',
@@ -50,8 +50,8 @@ class AuthViewModel implements AuthViewModelInterface {
     try {
 
       final dio = Dio();
-      dio.options.connectTimeout = const Duration(seconds: 3);
-      dio.options.sendTimeout = const Duration(seconds: 3);
+      dio.options.connectTimeout = const Duration(seconds: 5);
+      dio.options.sendTimeout = const Duration(seconds: 5);
 
       final Response res = await dio.post(
         '$url$signupUrl',

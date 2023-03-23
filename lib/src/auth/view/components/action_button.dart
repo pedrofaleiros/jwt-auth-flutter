@@ -24,28 +24,28 @@ class ActionButton extends StatelessWidget {
     return Consumer<AuthController>(
       builder: (_, controller, ch) => ElevatedButton(
         style: ButtonStyle(
-          // backgroundColor: MaterialStateProperty.all(
-          //   formType == FormType.login
-          //       ? Theme.of(context).colorScheme.primary
-          //       : Theme.of(context).colorScheme.secondary,
-          // ),
-          padding: MaterialStateProperty.all(
-            controller.isLoading
-                ? const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 8,
-                  )
-                : const EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 10,
-                  ),
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
+            // backgroundColor: MaterialStateProperty.all(
+            //   formType == FormType.login
+            //       ? Theme.of(context).colorScheme.primary
+            //       : Theme.of(context).colorScheme.secondary,
+            // ),
+            // padding: MaterialStateProperty.all(
+            //   controller.isLoading
+            //       ? const EdgeInsets.symmetric(
+            //           horizontal: 30,
+            //           vertical: 8,
+            //         )
+            //       : const EdgeInsets.symmetric(
+            //           horizontal: 25,
+            //           vertical: 10,
+            //         ),
+            // ),
+            // shape: MaterialStateProperty.all(
+            //   RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(25),
+            //   ),
+            // ),
             ),
-          ),
-        ),
         onPressed: controller.isLoading
             ? null
             : () async {
@@ -57,11 +57,15 @@ class ActionButton extends StatelessWidget {
               },
         child: controller.isLoading
             ? _loadingIndicator
-            : Text(
-                formType == FormType.login ? 'Login' : 'Signup',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                child: Text(
+                  formType == FormType.login ? 'Login' : 'Signup',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
       ),

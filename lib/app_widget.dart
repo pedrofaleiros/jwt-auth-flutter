@@ -1,7 +1,10 @@
 import 'package:authentication/app_splash_page.dart';
 import 'package:authentication/src/auth/controller/auth_controller.dart';
 import 'package:authentication/src/auth/view/pages/auth_page.dart';
+import 'package:authentication/src/home/controller/food_controller.dart';
 import 'package:authentication/src/home/controller/home_controller.dart';
+import 'package:authentication/src/home/view/pages/edit_food_page.dart';
+import 'package:authentication/src/home/view/pages/foods_page.dart';
 import 'package:authentication/src/home/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +22,9 @@ class AppWidget extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => HomeController(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => FoodController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -30,9 +36,11 @@ class AppWidget extends StatelessWidget {
         ),
         initialRoute: AppSplashPage.routeName,
         routes: {
-          AppSplashPage.routeName: (_) => AppSplashPage(),
-          AuthPage.routeName: (_) => AuthPage(),
-          HomePage.routeName: (_) => HomePage(),
+          AppSplashPage.routeName: (_) => const AppSplashPage(),
+          AuthPage.routeName: (_) => const AuthPage(),
+          HomePage.routeName: (_) => const HomePage(),
+          FoodsPage.routeName: (_) => const FoodsPage(),
+          EditFoodPage.routeName: (_) => const EditFoodPage(),
         },
       ),
     );

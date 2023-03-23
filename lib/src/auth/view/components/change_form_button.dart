@@ -17,7 +17,7 @@ class ChangeFormButton extends StatelessWidget {
           ? MainAxisAlignment.end
           : MainAxisAlignment.start,
       children: [
-        TextButton(
+        OutlinedButton(
           onPressed: () {
             if (formType == FormType.login) {
               context.read<AuthController>().formType = FormType.signup;
@@ -26,19 +26,19 @@ class ChangeFormButton extends StatelessWidget {
             }
           },
           child: formType == FormType.login
-              ? Row(
-                  // mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text('Signup'),
-                    Icon(Icons.arrow_forward_ios),
-                  ],
+              ? Text(
+                  'Signup',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )
-              : Row(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.arrow_back_ios),
-                    Text('Login'),
-                  ],
+              : Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
         ),
       ],

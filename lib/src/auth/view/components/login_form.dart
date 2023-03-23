@@ -47,14 +47,14 @@ class ButtonsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        const Expanded(
+          flex: 2,
+          child: ChangeFormButton(formType: FormType.login),
+        ),
         Expanded(flex: 1, child: Container()),
         const Expanded(
-          flex: 1,
+          flex: 3,
           child: ActionButton(formType: FormType.login),
-        ),
-        const Expanded(
-          flex: 1,
-          child: ChangeFormButton(formType: FormType.login),
         ),
       ],
     );
