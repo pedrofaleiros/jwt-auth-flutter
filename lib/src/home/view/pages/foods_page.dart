@@ -5,8 +5,10 @@ import 'package:authentication/src/home/view/pages/edit_food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter/material.dart';
+
 class FoodsPage extends StatelessWidget {
-  const FoodsPage({super.key});
+  const FoodsPage({Key? key}) : super(key: key);
 
   static const routeName = '/foods';
 
@@ -22,13 +24,35 @@ class FoodsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<FoodController>(
-          builder: (_, controller, __) => ListView.builder(
-            itemCount: controller.foods.length,
-            itemBuilder: (_, index) => Food(
-              food: controller.foods[index],
+        child: Column(
+          children: [
+            TextField(
+              onChanged: (value) async {
+                final userToken = context.read<AuthController>().userToken;
+                if (userToken == null) {
+                  return;
+                }
+                await context
+                    .read<FoodController>()
+                    .searchFoods(userToken, value);
+              },
+              decoration: InputDecoration(
+                labelText: 'Filtrar por nome',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
+            SizedBox(height: 10),
+            Consumer<FoodController>(
+              builder: (_, controller, __) => Expanded(
+                child: ListView.builder(
+                  itemCount: controller.foods.length,
+                  itemBuilder: (_, index) => Food(
+                    food: controller.foods[index],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -17,6 +17,33 @@ class FoodController with ChangeNotifier {
     liquid: false,
   );
 
+  Future<void> searchFoods(String userToken, String search) async {
+    try {
+      final dio = Dio();
+      dio.options.connectTimeout = const Duration(seconds: 5);
+      dio.options.sendTimeout = const Duration(seconds: 5);
+
+      final Response res = await Dio().get(
+        'http://172.30.129.176:3333/food/search?name=$search',
+        options: Options(headers: {
+          'Authorization': 'Bearer ${userToken}',
+        }),
+      );
+
+      print(res.data);
+      final lista = res.data as List<dynamic>;
+
+      List<FoodModel> foods =
+          lista.map((food) => FoodModel.fromMap(food)).toList();
+
+      _foods = foods;
+    } catch (e) {
+      print(e.toString());
+    }
+
+    notifyListeners();
+  }
+
   Future<void> loadFoods(String userToken) async {
     try {
       final dio = Dio();
