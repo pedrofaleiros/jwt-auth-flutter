@@ -36,18 +36,23 @@ class FoodsPage extends StatelessWidget {
                     .read<FoodController>()
                     .searchFoods(userToken, value);
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Filtrar por nome',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Consumer<FoodController>(
               builder: (_, controller, __) => Expanded(
                 child: ListView.builder(
                   itemCount: controller.foods.length,
-                  itemBuilder: (_, index) => Food(
-                    food: controller.foods[index],
+                  itemBuilder: (_, index) => GestureDetector(
+                    onTap: (){
+                      print(controller.foods[index].id);
+                    },
+                    child: Food(
+                      food: controller.foods[index],
+                    ),
                   ),
                 ),
               ),

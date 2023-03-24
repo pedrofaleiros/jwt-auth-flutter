@@ -1,3 +1,4 @@
+import 'package:authentication/src/auth/controller/auth_controller.dart';
 import 'package:authentication/src/home/controller/food_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -84,10 +85,27 @@ class EditFoodPage extends StatelessWidget {
                 },
               ),
               OutlinedButton(
-                onPressed: () {
-                  final food = context.read<FoodController>().foodToAdd;
+                onPressed: () async {
+                  final userToken = context.read<AuthController>().userToken;
 
-                  print(food.toJson());
+                  if (userToken == null) {
+                    return;
+                  }
+                  context
+                      .read<FoodController>()
+                      .addFood(userToken)
+                      .then((value) {
+                    if (value == null) {
+                      Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(value),
+                        ),
+                      );
+                    }
+                  });
                 },
                 child: Text('Add'),
               ),
